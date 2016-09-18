@@ -1,0 +1,38 @@
+
+<spring:url value="/resources/bootstrap/css/bootstrap.min.css" var="bootstrapCss" />
+<spring:url value="/resources/dist/css/AdminLTE.min.css" var="adminLTEMinCss" />
+<spring:url value="/resources/dist/css/skins/_all-skins.min.css" var="allSkinMinCss" />
+<spring:url value="/resources/plugins/jQuery/jQuery-2.2.0.min.js" var="jqueryJs" />
+<spring:url value="/resources/bootstrap/js/bootstrap.min.js" var="bootstrapJs" />
+<spring:url value="/resources/plugins/fastclick/fastclick.js" var="fastclickJs" />
+<spring:url value="/resources/dist/js/app.min.js" var="appMinJs" />
+<spring:url value="/resources/dist/js/demo.js" var="demoJs" />
+<spring:url value="/resources/dist/img/" var="resImg" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | User Profile</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="${bootstrapCss}"> 
+  <!-- <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  
+  <!-- Theme style -->
+  <link rel="stylesheet" href="${adminLTEMinCss}">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="${allSkinMinCss}">
+
+<script src="${jqueryJs}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="${bootstrapJs}"></script>
+<!-- FastClick -->
+<script src="${fastclickJs}"></script>
+<!-- AdminLTE App -->
+<script src="${appMinJs}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="${ demoJs}"></script>

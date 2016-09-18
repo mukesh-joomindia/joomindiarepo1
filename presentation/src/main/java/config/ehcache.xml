@@ -1,0 +1,22 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+    maxBytesLocalHeap="100M"
+    maxBytesLocalDisk="2G">
+
+ <sizeOfPolicy maxDepth="100000" maxDepthExceededBehavior="abort"/>
+
+ <defaultCache eternal="false" 
+    timeToIdleSeconds="120" 
+    timeToLiveSeconds="120"
+    memoryStoreEvictionPolicy="LRU" 
+    statistics="true">
+    <persistence strategy="localTempSwap"/>
+ </defaultCache>
+
+ <cache name="org.hibernate.cache.StandardQueryCache"
+    eternal="false" 
+    timeToIdleSeconds="120"
+    timeToLiveSeconds="120">
+    <persistence strategy="localTempSwap"/>
+ </cache>
+</ehcache>

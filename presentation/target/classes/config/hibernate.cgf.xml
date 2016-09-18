@@ -1,0 +1,28 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">123456789</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+        <property name="hibernate.connection.autocommit">true</property>
+		<property name="javax.persistence.validation.mode">none</property>
+        <property name="connection_pool_size">5</property>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="show_sql">true</property>
+         <!--  <mapping resource="config/hibernate.cgf.xml"></mapping>-->
+        <mapping class="in.xgen.web.profile.user.domain.User"/>
+       	<mapping class="in.xgen.web.profile.user.domain.UserToken"/>
+       	<mapping class="in.xgen.web.profile.user.domain.Country"/>		
+       	<mapping class="in.xgen.web.profile.user.domain.State"/>
+       	<mapping class="in.xgen.web.profile.user.domain.City"/>
+       	<mapping class="in.xgen.web.profile.user.domain.Profile"/>
+       	<mapping class="in.xgen.web.profile.user.domain.Address"/>
+       
+
+    </session-factory>
+</hibernate-configuration>

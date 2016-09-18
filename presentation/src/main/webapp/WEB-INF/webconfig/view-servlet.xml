@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	
+		<context:component-scan	base-package="in.xgen.web.profile.user.controller" />
+		<context:component-scan	base-package="in.xgen.web.profile.user.interceptor" />
+		 <!-- <mvc:view-controller path="/profile" view-name="profile"/> -->
+		<bean	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+			<property name="prefix">
+				<value>/WEB-INF/view/</value>
+			</property>
+			<property name="suffix">
+				<value>.jsp</value>
+			</property>
+    </bean>
+    
+     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:messages" />
+        
+    </bean>
+ 
+ 
+ <bean id="userServiceImpl" class="in.xgen.service.user.UserServiceImpl">
+ 
+ </bean>
+ 
+ <bean id="loginController" class="in.xgen.web.profile.user.controller.LoginController">
+ 	<constructor-arg>
+ 		<ref bean="userServiceImpl"/>
+ 	</constructor-arg>
+ </bean>
+ 
+ 
+ 
+	 <mvc:resources mapping="/resources/**" location="/resources/adminlte/" />
+	 
+	 <!-- Configuring interceptors based on URI -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/profile" />
+			<bean class="in.xgen.web.profile.user.interceptor.SessionInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<bean id = "userFormValidator" class="in.xgen.user.validator.UserFormValidator"/>
+	
+	 <mvc:annotation-driven />
+   
+</beans>

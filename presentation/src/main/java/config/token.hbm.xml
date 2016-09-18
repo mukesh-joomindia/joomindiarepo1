@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/HHibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class>
+<id name="tokenId" column="tokenId">
+<generator class="sequence">
+	<param name="sequence">usr_token_seq</param>
+</generator>
+</id>
+
+<property name="identificationId" column="identification"></property>
+<property name="tokens" column="tokens"></property>
+<property name="userId" column="userid"></property>
+<property name="generatedTime" column="token_gen_time"></property>
+
+</class>
+
+
+
+</hibernate-mapping>

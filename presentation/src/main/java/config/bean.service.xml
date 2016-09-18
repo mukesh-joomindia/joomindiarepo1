@@ -1,0 +1,13 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="uDao" class="in.xgen.web.profile.user.dao.UserDAOImpl">
+	</bean>
+	
+	<bean id="uService" class="in.xgen.service.user.UserServiceImpl">
+		<property name="UserDAO" ref="uDao">
+	</property>
+	</bean>
+	
+	</beans>

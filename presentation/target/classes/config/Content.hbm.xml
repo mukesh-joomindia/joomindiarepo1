@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/HHibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+<class name="in.xgen.web.profile.user.domain.ContentVO">
+	<id name="id" type="String" column="id"/>
+	<discriminaotr column="content_type"/>
+	<property name="uploadDate" column="upload_date"/>
+    <property name="contentSize" column="size"/>
+	<property name="path" column="path"/>
+	
+	<subclass="in.xgen.web.profile.user.domain.ImageVo" discriminator-value="IMG">
+		<property name="usedImgIn" column="upload_type"/>
+		<property name="uploadType"/>
+		
+	<subclass>
+
+	<subclass="in.xgen.web.profile.user.domain.DocumentVO" disscriminator-value="DOC">
+		<property name="contentType"/>
+		<property name="uploadType"/>
+	<subclass>
+</class>
+</hibernate-mappin>

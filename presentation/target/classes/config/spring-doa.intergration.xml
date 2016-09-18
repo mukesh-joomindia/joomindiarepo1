@@ -1,0 +1,88 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+		
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/postgres" />
+		<property name="username" value="postgres" />
+		<property name="password" value="123456789" />
+		</bean>
+
+<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiName" value="testjndi"/>
+</bean>
+
+
+	<bean id="sessFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="jndiDataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>in.xgen.web.profile.user.domain.User</value>
+				<value>in.xgen.web.profile.user.domain.UserToken</value>
+				<value>in.xgen.web.profile.user.domain.Country</value>
+				<value>in.xgen.web.profile.user.domain.State</value>
+				<value>in.xgen.web.profile.user.domain.City</value>
+				<value>in.xgen.web.profile.user.domain.Profile</value>
+				<value>in.xgen.web.profile.user.domain.Address</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
+				<prop key="javax.persistence.validation.mode">none</prop>
+				<prop key="hbm2ddl.auto">update</prop>
+				<prop key="connection_pool_size">5</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+			</props>
+		</property>
+	</bean>
+	
+	 <!-- Transaction -->
+    <!-- <bean id="transactionManager"
+        class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean> -->
+	
+	 <bean id="transactionManager"   class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessFactory" />
+    </bean> 
+	
+	
+	<bean id="addressDAOImpl" class="in.xgen.web.profile.user.dao.AddressDAOImpl" autowire="byType"></bean>
+	<bean id="loggingAspectObj" class="in.xgen.asepect.LoggingAspect"></bean>
+	<aop:config>
+
+      <!-- The Pointcut(s). -->
+      <aop:pointcut id="loggingPointcut"
+                    expression="within(in.xgen.web.profile.user.dao.AddressDAOImpl)" />
+
+      <!-- The Advice(s). -->
+      <aop:aspect id="loggingAspect" ref="loggingAspectObj">
+         <aop:before pointcut-ref="loggingPointcut" method="logEntry" />
+         <aop:after pointcut-ref="loggingPointcut" method="logExit" />
+         <aop:after-returning pointcut-ref="loggingPointcut"
+                              method="logExitAfterReturn" />
+      </aop:aspect>
+
+   </aop:config>
+	
+	<tx:annotation-driven/>
+	<context:annotation-config></context:annotation-config>
+</beans>
